@@ -11,7 +11,7 @@ import { fetchPosts, fetchTags } from '../redux/slices/post';
 
 // import { get } from 'react-hook-form';
 
-export const Home = () => {
+export const Home = ({ isPatient, patient }) => {
    const dispatch = useDispatch();
    const userData = useSelector((state) => state.auth.data);
    const { posts, tags } = useSelector((state) => state.posts);
@@ -24,7 +24,9 @@ export const Home = () => {
       dispatch(fetchTags());
    }, []);
 
-   console.log(posts);
+   console.log(patient, 'zzzz');
+
+   // console.log(isPatient, '100000000000');
 
    return (
       <>
@@ -34,24 +36,55 @@ export const Home = () => {
          </Tabs>
          <Grid container spacing={4}>
             <Grid xs={8} item>
-               {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
-                  isPostsLoading ? (
-                     <Post key={index} isLoading={true} />
-                  ) : (
-                     <Post
-                        id={obj._id}
-                        title={obj.title}
-                        imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''}
-                        user={obj.user}
-                        createdAt={obj.createdAt}
-                        viewsCount={obj.viewsCount}
-                        commentsCount={3}
-                        tags={obj.tags}
-                        isEditable={userData?._id === obj.user._id}
-                     />
-                  ),
+               {isPostsLoading ? (
+                  // Вывод загрузочных элементов, если данные все еще загружаются
+                  [...Array(5)].map((_, index) => <Post key={index} isLoading={true} />)
+               ) : (
+                  <>
+                     {/* Вывод компонента для пациента (если применимо) */}
+                     {isPatient &&
+                        patient &&
+                        posts.items
+                           .filter((obj) => obj.title === patient.fullName) // Фильтруем посты по условию
+                           .map((obj, index) => (
+                              <Post
+                                 key={index}
+                                 id={obj._id}
+                                 title={obj.title}
+                                 imageUrl={
+                                    obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''
+                                 }
+                                 user={obj.user}
+                                 createdAt={obj.createdAt}
+                                 viewsCount={obj.viewsCount}
+                                 commentsCount={3}
+                                 tags={obj.tags}
+                                 isEditable={userData?._id === obj.user._id}
+                                 isChek={obj.user}
+                              />
+                           ))}
+
+                     {/* Вывод элементов <Post> */}
+                     {!isPatient &&
+                        posts.items.map((obj, index) => (
+                           <Post
+                              key={index}
+                              id={obj._id}
+                              title={obj.title}
+                              imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''}
+                              user={obj.user}
+                              createdAt={obj.createdAt}
+                              viewsCount={obj.viewsCount}
+                              commentsCount={3}
+                              tags={obj.tags}
+                              isEditable={userData?._id === obj.user._id}
+                              isChek={obj.user}
+                           />
+                        ))}
+                  </>
                )}
             </Grid>
+
             <Grid xs={4} item>
                <TagsBlock items={tags.items} isLoading={isTagsLoading} />
                <CommentsBlock

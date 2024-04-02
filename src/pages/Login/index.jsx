@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -14,6 +14,8 @@ import { fetchUserData, selectIsAuth } from '../../redux/slices/auth';
 export const Login = () => {
    const isAuth = useSelector(selectIsAuth);
    const dispatch = useDispatch();
+   const [userType, setUserType] = useState('patient'); // State для хранения выбранного типа пользователя
+
    const {
       register,
       handleSubmit,
@@ -27,7 +29,7 @@ export const Login = () => {
    });
 
    const onSubmit = async (values) => {
-      const data = await dispatch(fetchUserData(values));
+      const data = await dispatch(fetchUserData({ ...values, userType })); // Передаем выбранный тип пользователя вместе с данными
 
       if (!data.payload) {
          return alert('Не удалось авторизоваться');

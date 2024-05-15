@@ -16,6 +16,7 @@
     "easymde": "^2.16.1",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
+    "react-doc-viewer": "^0.1.5",
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.32.0",
     "react-markdown": "^8.0.3",

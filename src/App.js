@@ -31,7 +31,7 @@ function App() {
    });
 
    // Теперь у вас есть доступ к полю data.patient из промиса в Redux store
-   console.log(patient, 10101001010);
+   // console.log(patient, 10101001010);
 
    return (
       <>
@@ -48,8 +48,14 @@ function App() {
                      )
                   }
                />
-               <Route path="/posts/:id" element={<FullPost />} />
-               <Route path="/posts/:id/edit" element={<AddPost />} />
+               <Route
+                  path="/posts/:id"
+                  element={<FullPost isPatient={patientData} patient={patient} />}
+               />
+               <Route
+                  path="/posts/:id/edit"
+                  element={<AddPost isPatient={patientData} patient={patient} />}
+               />
                <Route path="/add-post" element={<AddPost />} />
                <Route path="/login" element={<Login />} />
                <Route path="/register" element={<Registration />} />

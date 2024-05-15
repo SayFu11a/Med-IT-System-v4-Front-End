@@ -8,7 +8,7 @@ export const theme = createTheme({
    ], // заменил
    palette: {
       primary: {
-         main: '#4361ee',
+         main: '#ffff',
       },
    },
    typography: {

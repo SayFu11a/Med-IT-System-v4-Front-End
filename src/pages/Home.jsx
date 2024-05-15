@@ -24,15 +24,14 @@ export const Home = ({ isPatient, patient }) => {
       dispatch(fetchTags());
    }, []);
 
-   console.log(patient, 'zzzz');
+   // console.log(patient, 'zzzz');
 
    // console.log(isPatient, '100000000000');
 
    return (
       <>
          <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
-            <Tab label="Новые" />
-            <Tab label="Популярные" />
+            <Tab label="Главная" />
          </Tabs>
          <Grid container spacing={4}>
             <Grid xs={8} item>
@@ -61,6 +60,7 @@ export const Home = ({ isPatient, patient }) => {
                                  tags={obj.tags}
                                  isEditable={userData?._id === obj.user._id}
                                  isChek={obj.user}
+                                 isPatient={isPatient}
                               />
                            ))}
 

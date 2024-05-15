@@ -31,7 +31,10 @@ export const Header = () => {
                         <Link to="/add-post">
                            <Button variant="contained">Добавить Пациента</Button>
                         </Link>
-                        <Button onClick={onClickLogout} variant="contained" color="error">
+                        <Button
+                           onClick={onClickLogout}
+                           variant="contained"
+                           style={{ background: 'white' }}>
                            Выйти
                         </Button>
                      </>

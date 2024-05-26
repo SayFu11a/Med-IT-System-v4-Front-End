@@ -7,7 +7,7 @@ import styles from './Header.module.scss';
 import Container from '@mui/material/Container';
 import { logout, selectIsAuth } from '../../redux/slices/auth';
 
-export const Header = () => {
+export const Header = ({ isPatient, patient }) => {
    const dispatch = useDispatch();
    const isAuth = useSelector(selectIsAuth);
 
@@ -28,9 +28,35 @@ export const Header = () => {
                <div className={styles.buttons}>
                   {isAuth ? (
                      <>
-                        <Link to="/add-post">
-                           <Button variant="contained">Добавить Пациента</Button>
+                        <Link to="/chat">
+                           <Button variant="contained">
+                              {' '}
+                              <img
+                                 src="https://cdn1.iconfinder.com/data/icons/office-322/24/email-message-envelope-letter-1024.png"
+                                 alt=""
+                                 width="20"
+                                 style={{ marginRight: '10px', verticalAlign: 'middle' }}
+                              />
+                              Сообщения
+                           </Button>
                         </Link>
+                        <Link to="/calendar">
+                           <Button variant="contained">
+                              {' '}
+                              <img
+                                 src="https://cdn3.iconfinder.com/data/icons/teamwork-and-organization/25/list_clipboard_planning-1024.png"
+                                 alt=""
+                                 width="20"
+                                 style={{ marginRight: '10px', verticalAlign: 'middle' }}
+                              />
+                              Самочувствие
+                           </Button>
+                        </Link>
+                        {!isPatient && (
+                           <Link to="/add-post">
+                              <Button variant="contained">Добавить Пациента</Button>
+                           </Link>
+                        )}
                         <Button
                            onClick={onClickLogout}
                            variant="contained"

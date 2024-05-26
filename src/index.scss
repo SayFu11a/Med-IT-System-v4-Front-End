@@ -5,3 +5,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #dff2f2 !important;
 }
+
+.react-datepicker {
+  font-size: 16px;
+}
+
+.react-datepicker__time-container {
+  width: 100px;
+}
+.react-datepicker {
+  font-size: 2.4rem; /* Увеличивает размер шрифта в два раза */
+  width: 700px; /* Удваивает ширину календаря */
+}
+
+.react-datepicker__header {
+  background-color: #f0f0f0; /* Цвет фона заголовка */
+  padding: 20px 0; /* Увеличивает отступы в заголовке */
+}
+
+.react-datepicker__month {
+  margin: 1.3rem; /* Увеличивает расстояние между месяцами */
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name {
+  width: 5rem; /* Удваивает ширину элементов дней и времён */
+  line-height: 5rem; /* Удваивает высоту линии, соответствующую ширине */
+  margin: 0.4rem; /* Увеличивает расстояние между элементами */
+}
+
+

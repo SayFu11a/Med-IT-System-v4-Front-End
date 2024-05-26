@@ -95,8 +95,20 @@ export const FullPost = ({ isPatient, patient }) => {
                   marginBottom: '10px',
                   width: '250px',
                }}>
-               <Link to={`/posts/${id}/edit`}>
-                  <IconButton color="primary">
+               <Link
+                  style={{
+                     backgroundColor: 'white',
+                     color: 'black',
+                     marginBottom: '10px',
+                     width: '250px',
+                  }}
+                  to={`/posts/${id}/edit`}>
+                  <IconButton
+                     style={{
+                        backgroundColor: 'white',
+                        color: 'black',
+                     }}
+                     color="primary">
                      <EditIcon />
                   </IconButton>
                </Link>
@@ -137,9 +149,9 @@ export const FullPost = ({ isPatient, patient }) => {
                   href={`http://localhost:4444${data.documentUrl}`}
                   download="Документ.docx"
                   style={{
-                     backgroundColor: 'white',
+                     backgroundColor: 'black',
                      border: 'none',
-                     color: 'black',
+                     color: 'white',
                      padding: '15px 32px',
                      textAlign: 'center',
                      textDecoration: 'none',

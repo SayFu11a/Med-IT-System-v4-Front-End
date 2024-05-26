@@ -1,0 +1,62 @@
+.react-datepicker {
+   font-size: 16px;
+ }
+ 
+ .react-datepicker__time-container {
+   width: 500px;
+ }
+ .symptomsContainer {
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   padding: 20px;
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   background-color: #f9f9f9;
+ }
+ 
+ .symptom-item {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+ }
+ 
+ input[type="checkbox"] {
+   appearance: none;
+   width: 20px;
+   height: 20px;
+   border: 2px solid #333;
+   border-radius: 4px;
+   background-color: #fff;
+   cursor: pointer;
+   transition: background-color 0.3s, border-color 0.3s;
+ }
+ 
+ input[type="checkbox"]:checked {
+   background-color: #333;
+   border-color: #333;
+ }
+ 
+ input[type="checkbox"]:checked::before {
+   content: '✓';
+   display: block;
+   color: #fff;
+   font-size: 14px;
+   text-align: center;
+   line-height: 20px;
+ }
+ 
+ label {
+   font-size: 16px;
+   color: #333;
+   cursor: pointer;
+ }
+ .symptomsContainer {
+   display: grid;
+   grid-template-columns: repeat(2, 1.1fr); /* Создает два столбца с одинаковой шириной */
+   gap: 10px; /* Расстояние между элементами в решетке */
+ }
+
+ .symptomItem {
+   margin-bottom: 10px; /* Отступ снизу для лучшей читаемости */
+ }

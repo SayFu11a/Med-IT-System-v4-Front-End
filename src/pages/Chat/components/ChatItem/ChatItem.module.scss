@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  cursor: pointer;
+
+  border-bottom: 1px solid rgb(221, 221, 227);
+  .avatarImg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+
+  .userInfo {
+    p {
+      margin: 0;
+    }
+
+    .userName {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 20px;
+      margin-bottom: 8px;
+    }
+  }
+}

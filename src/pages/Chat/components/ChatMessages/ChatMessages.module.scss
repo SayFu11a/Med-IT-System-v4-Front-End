@@ -1,0 +1,123 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+  height: calc(100% - 73px);
+  padding: 20px;
+
+  p {
+    margin: 0;
+  }
+
+  .messageText {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+  }
+
+  .timeLabel {
+    text-align: center;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 600;
+    color: rgb(161, 160, 172);
+  }
+
+  .doctorMessage {
+    align-self: flex-end;
+    max-width: 520px;
+    min-width: 220px;
+    border-radius: 12px 12px 0px;
+    padding: 15px 12px;
+    background-color: rgb(115, 87, 255);
+
+    .messageTime {
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+      color: rgb(255, 255, 255);
+      margin-bottom: 12px;
+    }
+  }
+
+  .patientMessage {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .patientImg {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+    }
+
+    .textBlock {
+      background-color: rgb(234, 233, 241);
+      max-width: 520px;
+      min-width: 220px;
+      padding: 12px;
+      border-radius: 12px 12px 12px 0px;
+      p {
+        color: rgb(36, 36, 36);
+      }
+
+      .topInfo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+
+        .patientName {
+          color: rgb(36, 36, 36);
+          font-weight: 700;
+          font-size: 16px;
+          line-height: 20px;
+        }
+
+        .patientMessageTime {
+          color: rgb(106, 106, 113);
+          font-size: 14px;
+          line-height: 18px;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .inputContainer {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+
+    background-color: #fff;
+    border-top: 1px solid rgb(221, 221, 227);
+
+    .userInput {
+      width: 100%;
+      padding: 12.5px;
+      border: none;
+      border-radius: 8px;
+      background-color: rgb(232, 232, 237);
+      outline: none;
+      color: rgb(36, 36, 36);
+    }
+
+    button {
+      border: none;
+      background-color: #1b4182;
+      color: #fff;
+      padding: 11.5px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+}

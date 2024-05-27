@@ -53,8 +53,6 @@ label {
 }
 .symptomsContainer {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .symptomItem {
@@ -62,15 +60,9 @@ label {
   align-items: center;
   gap: 8px;
   line-height: 20px;
-  border: 1px solid rgb(221, 221, 227);
   border-radius: 24px;
-  padding: 6px 8px;
-  width: fit-content;
 }
 
-.symptomItemChecked {
-  background-color: rgb(221, 221, 227);
-}
 
 .submitBtn {
   cursor: pointer;

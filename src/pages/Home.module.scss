@@ -1,0 +1,17 @@
+.root {
+  .content {
+    display: flex;
+    gap: 25px;
+
+    .postsList {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .contentRight {
+      max-width: 365px;
+    }
+  }
+}

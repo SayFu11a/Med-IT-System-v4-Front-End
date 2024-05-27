@@ -1,7 +1,9 @@
 $blue: #4361ee;
 
 .root {
-  background-color: #1111;
+  max-width: 370px;
+  width: 100%;
+  background-color: #fff;
   border: 1px solid #dedede;
   border-radius: 20px;
   overflow: hidden;
@@ -38,7 +40,7 @@ $blue: #4361ee;
 }
 
 .wrapper {
-  padding: 10px 20px 20px;
+  padding: 10px 16px 16px;
 }
 
 .content {
@@ -51,11 +53,14 @@ $blue: #4361ee;
 }
 
 .indention {
-  padding-left: 40px;
+  // padding-left: 40px;
 }
 
 .title {
-  font-size: 28px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 24px;
+  color: rgb(36, 36, 36);
   margin: 0;
 
   a {
@@ -76,7 +81,7 @@ $blue: #4361ee;
 .tags {
   list-style: none;
   padding: 0;
-  margin: 5px 0 0 0;
+  margin: 5px 0 10px 0;
 
   li {
     display: inline-block;
@@ -96,6 +101,8 @@ $blue: #4361ee;
 }
 
 .postDetails {
+  display: flex;
+
   list-style: none;
   padding: 0;
   margin: 20px 0 0 0;

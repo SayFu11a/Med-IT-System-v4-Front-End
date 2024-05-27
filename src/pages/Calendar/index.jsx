@@ -96,12 +96,7 @@ function Calendar() {
         />
         <div className={styles.symptomsContainer}>
           {symptoms.map((symptom) => (
-            <div
-              key={symptom}
-              className={classNames(styles.symptomItem, {
-                [styles.symptomItemChecked]: symptomChecks[symptom]
-              })}
-            >
+            <div key={symptom} className={styles.symptomItem}>
               <input
                 type="checkbox"
                 id={symptom}

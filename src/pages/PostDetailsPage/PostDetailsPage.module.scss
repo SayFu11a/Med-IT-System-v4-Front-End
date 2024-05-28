@@ -9,6 +9,10 @@
     margin: 0;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .postBlock {
     display: flex;
     flex-direction: column;
@@ -63,6 +67,24 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    background-color: #1b4182;
+    color: #fff;
+    padding: 11.5px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    max-width: 250px;
+    cursor: pointer;
+    span {
+      text-decoration: none !important;
     }
   }
 }

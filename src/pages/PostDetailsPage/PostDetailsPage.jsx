@@ -139,36 +139,17 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
       </div>
 
       {data?.user._id === userData?._id && !isPatient && (
-        <div
-          className="editButtons"
+        <Link
           style={{
-            backgroundColor: 'white',
-            color: 'black',
-            marginBottom: '10px',
-            width: '250px'
+            color: '#fff'
           }}
+          to={`/posts/${id}/edit`}
         >
-          <Link
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              marginBottom: '10px',
-              width: '250px'
-            }}
-            to={`/posts/${id}/edit`}
-          >
-            <IconButton
-              style={{
-                backgroundColor: 'white',
-                color: 'black'
-              }}
-              color="primary"
-            >
-              <EditIcon />
-            </IconButton>
-          </Link>
-          <span>Изменить данные</span>
-        </div>
+          <div className={styles.button}>
+            <EditIcon />
+            <span>Изменить данные</span>
+          </div>
+        </Link>
       )}
       {data?.title == patient?.fullName && isPatient && (
         <div

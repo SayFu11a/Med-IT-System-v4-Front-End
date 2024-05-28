@@ -17,7 +17,7 @@ export const Post = ({
   id,
   title,
   createdAt,
-  imageUrl,
+  src,
   user,
   viewsCount,
   commentsCount,
@@ -57,10 +57,10 @@ export const Post = ({
           </IconButton>
         </div>
       )}
-      {imageUrl && (
+      {src && (
         <img
           className={clsx(styles.image, { [styles.imageFull]: isFullPost })}
-          src={imageUrl}
+          src={src}
           alt={title}
         />
       )}

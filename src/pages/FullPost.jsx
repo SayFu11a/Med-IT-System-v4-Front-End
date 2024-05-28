@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import axios from '../axios';
+import axios, { baseURL } from '../axios';
 import DocViewer from 'react-doc-viewer';
 import Button from '@mui/material/Button';
 
@@ -77,7 +77,7 @@ export const FullPost = ({ isPatient, patient }) => {
          <Post
             id={data._id}
             title={data.title}
-            imageUrl={data.imageUrl ? `http://localhost:4444${data.imageUrl}` : ''}
+            imageUrl={data.imageUrl ? `${baseURL}${data.imageUrl}` : ''}
             user={data.user}
             createdAt={data.createdAt}
             viewsCount={data.viewsCount}
@@ -146,7 +146,7 @@ export const FullPost = ({ isPatient, patient }) => {
                   {data.documentUrl}
                </div>
                <a
-                  href={`http://localhost:4444${data.documentUrl}`}
+                  href={`${baseURL}${data.documentUrl}`}
                   download="Документ.docx"
                   style={{
                      backgroundColor: 'black',

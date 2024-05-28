@@ -9,7 +9,7 @@ import SimpleMDE from 'react-simplemde-editor';
 
 import 'easymde/dist/easymde.min.css';
 import { selectIsAuth } from '../../redux/slices/auth';
-import axios from '../../axios';
+import axios, { baseURL } from '../../axios';
 import styles from './AddPost.module.scss';
 
 export const AddPost = ({ isPatient, patient }) => {
@@ -137,7 +137,7 @@ export const AddPost = ({ isPatient, patient }) => {
                      </Button>
                      <img
                         className={styles.image}
-                        src={`http://localhost:4444${imageUrl}`}
+                        src={`${baseURL}${imageUrl}`}
                         alt="Uploaded"
                      />
                   </>

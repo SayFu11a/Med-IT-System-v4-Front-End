@@ -74,7 +74,7 @@ export const Home = ({ isPatient, patient }) => {
                     id={obj._id}
                     title={obj.title}
                     imageUrl={
-                      obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ''
+                      obj.imageUrl ? `${baseURL}${obj.imageUrl}` : ''
                     }
                     user={obj.user}
                     createdAt={obj.createdAt}

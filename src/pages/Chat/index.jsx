@@ -5,6 +5,7 @@ import { selectIsAuth } from '../../redux/slices/auth'
 import styles from './Chat.module.scss'
 import { ChatItem } from './components/ChatItem/ChatItem'
 import { ChatMessages } from './components/ChatMessages/ChatMessages'
+import { baseURL } from '../../axios'
 
 const Chat = ({ patient }) => {
   const isAuth = useSelector(selectIsAuth)
@@ -18,7 +19,7 @@ const Chat = ({ patient }) => {
   useEffect(() => {
     if (isAuth) {
       axios
-        .get('http://localhost:4444/messages', {
+        .get(`${baseURL}/messages`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
@@ -38,7 +39,7 @@ const Chat = ({ patient }) => {
   const handleSendMessage = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:4444/messages',
+        `${baseURL}/messages`,
         {
           receiverId,
           message: newMessage,

@@ -11,6 +11,7 @@ import 'easymde/dist/easymde.min.css';
 import { selectIsAuth } from '../../redux/slices/auth';
 import axios from '../../axios';
 import styles from './AddPost.module.scss';
+import { baseURL } from './axios'
 
 export const AddPost = () => {
    const navigate = useNavigate();
@@ -97,7 +98,7 @@ export const AddPost = () => {
                </Button>
                <img
                   className={styles.image}
-                  src={`http://localhost:4444${imageUrl}`}
+                  src={`${baseURL}${imageUrl}`}
                   alt="Uploaded"
                />
             </>

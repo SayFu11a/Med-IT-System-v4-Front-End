@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-import axios from '../../axios'
+import axios, { baseURL } from '../../axios'
 
 import styles from './Calendar.module.scss'
 import classNames from 'classnames'
@@ -46,7 +46,7 @@ function Calendar() {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:4444/health/addRecord',
+        `${baseURL}/health/addRecord`,
         {
           date: selectedDate,
           symptoms: symptomChecks

@@ -44,7 +44,10 @@ export const Post = ({
   }
 
   return (
-    <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
+    <div
+      className={clsx(styles.root, { [styles.rootFull]: isFullPost })}
+      style={{ maxWidth: isFullPost ? 'unset' : 370 }}
+    >
       {isEditable && !isPatient && (
         <div className={styles.editButtons}>
           <Link to={`/posts/${id}/edit`}>

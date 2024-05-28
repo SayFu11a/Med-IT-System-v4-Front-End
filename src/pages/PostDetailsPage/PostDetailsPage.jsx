@@ -19,6 +19,7 @@ import { Index } from '../../components/AddComment'
 import { CommentsBlock } from '../../components/CommentsBlock'
 import styles from './PostDetailsPage.module.scss'
 import classNames from 'classnames'
+import { Download, DownloadDone } from '@mui/icons-material'
 
 export const PostDetailsPage = ({ isPatient, patient }) => {
   const [data, setData] = React.useState()
@@ -77,7 +78,7 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
     }
   }
 
-  console.log(data.user)
+  console.log(data)
 
   return (
     <div className={styles.root}>
@@ -169,42 +170,19 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
           <>{isPatient && <span>Добавить Документы</span>}</>
         </div>
       )}
+
       {/* Отображение загруженных документов */}
       {data.documentUrl && (
-        <>
-          <div
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              padding: '10px',
-              borderRadius: '5px',
-              marginBottom: '10px'
-            }}
-          >
-            {data.documentUrl}
+        <a
+          className={styles.downloadLink}
+          href={`${baseURL}${data.documentUrl}`}
+          download="Документ.docx"
+        >
+          <div div className={classNames(styles.downloadBlock, styles.wrapper)}>
+            <p>{data.documentUrl.split('/')[2]}</p>
+            <Download />
           </div>
-          <a
-            href={`${baseURL}${data.documentUrl}`}
-            download="Документ.docx"
-            style={{
-              backgroundColor: 'black',
-              border: 'none',
-              color: 'white',
-              padding: '15px 32px',
-              textAlign: 'center',
-              textDecoration: 'none',
-              display: 'inline-block',
-              fontSize: '16px',
-              margin: '4px 2px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
-              transition: '0.3s',
-              borderRadius: '12px'
-            }}
-          >
-            Download Document
-          </a>
-        </>
+        </a>
       )}
       <CommentsBlock
         items={[

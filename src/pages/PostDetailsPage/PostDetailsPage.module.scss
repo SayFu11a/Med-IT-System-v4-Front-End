@@ -1,7 +1,7 @@
 .root {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 16px;
   max-width: 905px;
   margin: 0 auto;
 
@@ -16,7 +16,7 @@
   .postBlock {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 16px;
 
     .headData {
       .userInfo {
@@ -77,14 +77,31 @@
     border: none;
     background-color: #1b4182;
     color: #fff;
-    padding: 11.5px;
+    padding: 12px;
     border-radius: 8px;
     font-size: 15px;
     font-weight: 500;
-    max-width: 250px;
+    width: fit-content;
     cursor: pointer;
     span {
       text-decoration: none !important;
+    }
+  }
+
+  .downloadLink {
+    margin: 0;
+    .downloadBlock {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        color: #000;
+      }
+
+      svg {
+        fill: #000;
+      }
     }
   }
 }

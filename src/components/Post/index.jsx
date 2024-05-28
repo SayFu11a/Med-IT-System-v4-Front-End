@@ -50,13 +50,22 @@ export const Post = ({
     >
       <Link to={`/posts/${id}`}>
         {isEditable && !isPatient && (
-          <div className={styles.editButtons}>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className={styles.editButtons}
+          >
             <Link to={`/posts/${id}/edit`}>
               <IconButton color="primary">
                 <EditIcon />
               </IconButton>
             </Link>
-            <IconButton onClick={onClickRemove} color="secondary">
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation()
+                onClickRemove()
+              }}
+              color="secondary"
+            >
               <DeleteIcon />
             </IconButton>
           </div>

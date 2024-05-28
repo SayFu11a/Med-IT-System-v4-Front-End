@@ -9,6 +9,7 @@ import { Post } from '../components/Post'
 import { TagsBlock } from '../components/TagsBlock'
 import { CommentsBlock } from '../components/CommentsBlock'
 import { fetchPosts, fetchTags } from '../redux/slices/post'
+import { baseURL } from '../axios'
 
 // import { get } from 'react-hook-form';
 
@@ -24,7 +25,6 @@ export const Home = ({ isPatient, patient }) => {
     dispatch(fetchPosts())
     dispatch(fetchTags())
   }, [])
-
 
   return (
     <div className={styles.root}>
@@ -54,11 +54,7 @@ export const Home = ({ isPatient, patient }) => {
                       key={index}
                       id={obj._id}
                       title={obj.title}
-                      imageUrl={
-                        obj.imageUrl
-                          ? `http://localhost:4444${obj.imageUrl}`
-                          : ''
-                      }
+                      imageUrl={obj.imageUrl ? `${baseURL}${obj.imageUrl}` : ''}
                       user={obj.user}
                       createdAt={obj.createdAt}
                       viewsCount={obj.viewsCount}

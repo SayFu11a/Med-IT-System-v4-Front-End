@@ -1,6 +1,7 @@
 $blue: #4361ee;
 
 .root {
+  cursor: pointer;
   max-width: 370px;
   width: 100%;
   background-color: #fff;
@@ -9,6 +10,11 @@ $blue: #4361ee;
   overflow: hidden;
   margin-bottom: 15px;
   position: relative;
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 
   &:hover {
     border: 1px solid $blue;

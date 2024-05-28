@@ -6,8 +6,6 @@ import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import axios, { baseURL } from '../../axios'
-import DocViewer from 'react-doc-viewer'
-import Button from '@mui/material/Button'
 
 import { Link } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton'
@@ -19,7 +17,7 @@ import { Index } from '../../components/AddComment'
 import { CommentsBlock } from '../../components/CommentsBlock'
 import styles from './PostDetailsPage.module.scss'
 import classNames from 'classnames'
-import { Download, DownloadDone } from '@mui/icons-material'
+import { Download } from '@mui/icons-material'
 
 export const PostDetailsPage = ({ isPatient, patient }) => {
   const [data, setData] = React.useState()
@@ -28,12 +26,6 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
   const [documentUrl, setDocumentUrl] = React.useState('') // Состояние для хранения URL загруженного документа
   const inputFileRef = React.useRef(null)
   const userData = useSelector((state) => state.auth.data)
-
-  console.log(data?.user._id, 'Врач   data?.user._id')
-  console.log(userData?._id, 'current User   userData?._id')
-  console.log(isPatient, 'isPatient')
-  console.log(patient?.fullName, 'patient')
-  console.log(data?.title, 'data title')
 
   React.useEffect(() => {
     axios
@@ -62,15 +54,12 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
   }
 
   const handleSaveDocument = async () => {
-    // Здесь можно добавить логику сохранения URL загруженного документа на сервере
     alert('Документ сохранен!')
   }
 
   if (isLoading) {
     return <Post isLoading={isLoading} isFullPost />
   }
-
-  // console.log(data.documentUrl, 1111111111111111111111111111);
 
   const isEditable = () => {
     if (data?.user._id === userData?._id) {
@@ -82,19 +71,6 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
 
   return (
     <div className={styles.root}>
-      {/* <Post
-        id={data._id}
-        title={data.title}
-        imageUrl={data.imageUrl ? `${baseURL}${data.imageUrl}` : ''}
-        user={data.user}
-        createdAt={data.createdAt}
-        viewsCount={data.viewsCount}
-        commentsCount={3}
-        tags={data.tags}
-        isFullPost
-      >
-        <ReactMarkdown children={data.text} />
-      </Post> */}
       <div className={styles.postBlock}>
         <div className={classNames(styles.headData, styles.wrapper)}>
           <div className={styles.userInfo}>
@@ -207,19 +183,4 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
       </CommentsBlock>
     </div>
   )
-}
-{
-  /* <Post
-        id={data._id}
-        title={data.title}
-        imageUrl={data.imageUrl ? `${baseURL}${data.imageUrl}` : ''}
-        user={data.user}
-        createdAt={data.createdAt}
-        viewsCount={data.viewsCount}
-        commentsCount={3}
-        tags={data.tags}
-        isFullPost
-      >
-        <ReactMarkdown children={data.text} />
-      </Post> */
 }

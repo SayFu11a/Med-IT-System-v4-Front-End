@@ -1,21 +1,26 @@
 import React from 'react'
+import EditIcon from '@mui/icons-material/Edit'
+import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined'
+import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined'
+
 import { useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import axios, { baseURL } from '../axios'
+import axios, { baseURL } from '../../axios'
 import DocViewer from 'react-doc-viewer'
 import Button from '@mui/material/Button'
 
 import { Link } from 'react-router-dom'
 import IconButton from '@mui/material/IconButton'
-import EditIcon from '@mui/icons-material/Edit'
 
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Post } from '../components/Post'
-import { Index } from '../components/AddComment'
-import { CommentsBlock } from '../components/CommentsBlock'
+import { Post } from '../../components/Post'
+import { Index } from '../../components/AddComment'
+import { CommentsBlock } from '../../components/CommentsBlock'
+import styles from './PostDetailsPage.module.scss'
+import classNames from 'classnames'
 
-export const FullPost = ({ isPatient, patient }) => {
+export const PostDetailsPage = ({ isPatient, patient }) => {
   const [data, setData] = React.useState()
   const [isLoading, setLoading] = React.useState(true)
   const { id } = useParams()
@@ -72,9 +77,11 @@ export const FullPost = ({ isPatient, patient }) => {
     }
   }
 
+  console.log(data.user)
+
   return (
-    <>
-      <Post
+    <div className={styles.root}>
+      {/* <Post
         id={data._id}
         title={data.title}
         imageUrl={data.imageUrl ? `${baseURL}${data.imageUrl}` : ''}
@@ -86,7 +93,51 @@ export const FullPost = ({ isPatient, patient }) => {
         isFullPost
       >
         <ReactMarkdown children={data.text} />
-      </Post>
+      </Post> */}
+      <div className={styles.postBlock}>
+        <div className={classNames(styles.headData, styles.wrapper)}>
+          <div className={styles.userInfo}>
+            <img src={data.user.avatarUrl} alt="" className={styles.userImg} />
+            <div>
+              <p className={styles.doctorName}>Врач: {data.user.fullName}</p>
+              <p>{data.user.additionalText}</p>
+            </div>
+          </div>
+          <h3 className={styles.title}>{data.title}</h3>
+
+          <div className={styles.tags}>
+            {data.tags.map((name) => (
+              <span key={name}>
+                <Link to={`/tag/${name}`}>#{name}</Link>
+              </span>
+            ))}
+          </div>
+
+          <img
+            src={data.imageUrl ? `${baseURL}${data.imageUrl}` : ''}
+            alt=""
+            className={styles.postImg}
+          />
+        </div>
+
+        <div className={styles.wrapper}>
+          <ReactMarkdown children={data.text} />
+        </div>
+
+        <div className={styles.wrapper}>
+          <div className={styles.postMeta}>
+            <div className={styles.postMetaBlock}>
+              <EyeIcon />
+              <span>{data.viewsCount}</span>
+            </div>
+            <div className={styles.postMetaBlock}>
+              <CommentIcon />
+              <span>{data.commentsCount || 0}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {data?.user._id === userData?._id && !isPatient && (
         <div
           className="editButtons"
@@ -195,6 +246,21 @@ export const FullPost = ({ isPatient, patient }) => {
       >
         <Index />
       </CommentsBlock>
-    </>
+    </div>
   )
+}
+{
+  /* <Post
+        id={data._id}
+        title={data.title}
+        imageUrl={data.imageUrl ? `${baseURL}${data.imageUrl}` : ''}
+        user={data.user}
+        createdAt={data.createdAt}
+        viewsCount={data.viewsCount}
+        commentsCount={3}
+        tags={data.tags}
+        isFullPost
+      >
+        <ReactMarkdown children={data.text} />
+      </Post> */
 }

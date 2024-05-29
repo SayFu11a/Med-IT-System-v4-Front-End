@@ -80,7 +80,7 @@ export const Home = ({ isPatient, patient }) => {
                            .map((obj, index) => (
                               <Post
                                  key={index}
-                                 id={obj._id}
+                                 id={obj?._id}
                                  title={obj.title}
                                  imageUrl={obj.imageUrl ? `${baseURL}${obj.imageUrl}` : ''}
                                  user={obj.user}
@@ -99,7 +99,7 @@ export const Home = ({ isPatient, patient }) => {
                         posts.items.map((obj, index) => (
                            <Post
                               key={index}
-                              id={obj._id}
+                              id={obj?._id}
                               title={obj.title}
                               imageUrl={obj.imageUrl ? `${baseURL}${obj.imageUrl}` : ''}
                               user={obj.user}
@@ -107,7 +107,7 @@ export const Home = ({ isPatient, patient }) => {
                               viewsCount={obj.viewsCount}
                               commentsCount={3}
                               tags={obj.tags}
-                              isEditable={userData?._id === obj.user._id}
+                              isEditable={userData?._id === obj.user?._id}
                               isChek={obj.user}
                            />
                         ))}

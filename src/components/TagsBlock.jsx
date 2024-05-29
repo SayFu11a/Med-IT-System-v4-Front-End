@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import TagIcon from '@mui/icons-material/Tag';
 import ListItemText from '@mui/material/ListItemText';
 import Skeleton from '@mui/material/Skeleton';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 import { SideBlock } from './SideBlock';
 
@@ -19,7 +20,7 @@ export const TagsBlock = ({ items, isLoading = true }) => {
                   <ListItem key={i} disablePadding>
                      <ListItemButton>
                         <ListItemIcon>
-                           <TagIcon />
+                           <FiberManualRecordIcon />
                         </ListItemIcon>
                         {isLoading ? <Skeleton width={100} /> : <ListItemText primary={name} />}
                      </ListItemButton>

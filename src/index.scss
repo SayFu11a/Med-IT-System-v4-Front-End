@@ -3,9 +3,11 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Roboto';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff !important;
+  background-color: #fff !important;
 }
 
+
+/* стили калежаря */
 .react-datepicker {
   font-size: 16px;
 }
@@ -19,7 +21,7 @@ body {
 }
 
 .react-datepicker__header {
-  background-color: #f0f0f0; /* Цвет фона заголовка */
+  background-color: #fff; /* Цвет фона заголовка */
   padding: 20px 0; /* Увеличивает отступы в заголовке */
 }
 

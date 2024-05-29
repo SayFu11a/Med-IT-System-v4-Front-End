@@ -13,7 +13,7 @@ import { SideBlock } from './SideBlock';
 
 export const TagsBlock = ({ items, isLoading = true }) => {
    return (
-      <SideBlock title="Обзор">
+      <SideBlock title="Последние изменения">
          <List>
             {(isLoading ? [...Array(5)] : items).map((name, i) => (
                <a style={{ textDecoration: 'none', color: 'black' }} href={`/tags/${name}`}>

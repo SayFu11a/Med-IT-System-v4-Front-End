@@ -135,11 +135,7 @@ export const AddPost = ({ isPatient, patient }) => {
                      <Button variant="contained" color="error" onClick={onClickRemoveImage}>
                         Удалить
                      </Button>
-                     <img
-                        className={styles.image}
-                        src={`${baseURL}${imageUrl}`}
-                        alt="Uploaded"
-                     />
+                     <img className={styles.image} src={`${baseURL}${imageUrl}`} alt="Uploaded" />
                   </>
                )}
 
@@ -171,7 +167,11 @@ export const AddPost = ({ isPatient, patient }) => {
                   <input type="file" onChange={handleDocumentUpload} />
                </div>
                <div className={styles.buttons}>
-                  <Button onClick={onSubmit} size="large" variant="contained">
+                  <Button
+                     style={{ color: '#ffffff', backgroundColor: '#3f51b5' }}
+                     onClick={onSubmit}
+                     size="large"
+                     variant="contained">
                      {isEditing ? 'Редактировать' : 'Опубликовать'}
                   </Button>
                   <a href="/">

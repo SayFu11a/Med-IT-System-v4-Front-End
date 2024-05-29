@@ -74,12 +74,24 @@ export const Registration = () => {
                error={Boolean(errors.password?.message)}
                helperText={errors.password?.message}
                type="password"
-               {...register('password', { required: 'Укажите пороль' })}
+               {...register('password', {
+                  required: 'Укажите пароль',
+                  minLength: {
+                     value: 6,
+                     message: 'Пароль должен содержать не менее 6 символов',
+                  },
+               })}
                className={styles.field}
                label="Пароль"
                fullWidth
             />
-            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+            <Button
+               style={{ color: '#ffffff', backgroundColor: '#3f51b5' }}
+               disabled={!isValid}
+               type="submit"
+               size="large"
+               variant="contained"
+               fullWidth>
                Зарегистрироваться
             </Button>
          </form>

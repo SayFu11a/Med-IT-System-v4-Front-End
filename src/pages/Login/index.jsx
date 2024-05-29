@@ -67,7 +67,13 @@ export const Login = () => {
                {...register('password', { required: 'Укажите пароль' })}
                fullWidth
             />
-            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+            <Button
+               style={{ color: '#ffffff', backgroundColor: '#3f51b5' }}
+               disabled={!isValid}
+               type="submit"
+               size="large"
+               variant="contained"
+               fullWidth>
                Войти
             </Button>
          </form>

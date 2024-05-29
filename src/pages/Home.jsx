@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import styles from './Home.module.scss';
+
+import { Link } from 'react-router-dom';
 
 import { Post } from '../components/Post';
 import { TagsBlock } from '../components/TagsBlock';
@@ -20,15 +22,34 @@ export const Home = ({ isPatient, patient }) => {
    const isPostsLoading = posts.status === 'loading';
    const isTagsLoading = tags.status === 'loading';
 
+   const [tabValue, setTabValue] = useState(0);
+
    React.useEffect(() => {
       dispatch(fetchPosts());
       dispatch(fetchTags());
-   }, []);
+   }, [dispatch]);
+
+   const handleTabChange = (event, newValue) => {
+      setTabValue(newValue);
+   };
 
    return (
       <div className={styles.root}>
-         <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
-            <Tab label="Главная" />
+         <Tabs
+            onChange={handleTabChange}
+            style={{ marginBottom: 15 }}
+            value={tabValue}
+            aria-label="basic tabs example">
+            <Tab label="Главная" style={{ color: '#ffffff', backgroundColor: '#3f51b5' }} />
+            <Link style={{ textDecoration: 'none' }} to="/About">
+               <Tab
+                  label="О нас"
+                  style={{
+                     color: '#ffffff',
+                     backgroundColor: tabValue === 1 ? '#3f51b5' : 'rgba(63, 81, 181, 0.7)',
+                  }}
+               />
+            </Link>
          </Tabs>
          <div className={styles.content}>
             <div className={styles.postsList}>

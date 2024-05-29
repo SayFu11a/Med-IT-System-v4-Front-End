@@ -53,6 +53,10 @@ label {
 }
 .symptomsContainer {
   display: flex;
+
+  @media (max-width: 1149px) {
+    display: block;
+  }
 }
 
 .symptomItem {

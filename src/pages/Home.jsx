@@ -4,6 +4,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import styles from './Home.module.scss';
 
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+
 import { Link } from 'react-router-dom';
 
 import { Post } from '../components/Post';
@@ -23,6 +28,7 @@ export const Home = ({ isPatient, patient }) => {
    const isTagsLoading = tags.status === 'loading';
 
    const [tabValue, setTabValue] = useState(0);
+   const [menuAnchor, setMenuAnchor] = useState(null);
 
    React.useEffect(() => {
       dispatch(fetchPosts());
@@ -31,6 +37,14 @@ export const Home = ({ isPatient, patient }) => {
 
    const handleTabChange = (event, newValue) => {
       setTabValue(newValue);
+   };
+
+   const handleMenuOpen = (event) => {
+      setMenuAnchor(event.currentTarget);
+   };
+
+   const handleMenuClose = () => {
+      setMenuAnchor(null);
    };
 
    return (
@@ -102,26 +116,67 @@ export const Home = ({ isPatient, patient }) => {
             </div>
 
             <div className={styles.contentRight}>
-               <TagsBlock items={tags.items} isLoading={isTagsLoading} />
-               <CommentsBlock
-                  items={[
-                     {
-                        user: {
-                           fullName: 'Максим Данилов',
-                           avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
+               <div className={styles.blocks}>
+                  <TagsBlock items={tags.items} isLoading={isTagsLoading} />
+                  <CommentsBlock
+                     items={[
+                        {
+                           user: {
+                              fullName: 'Максим Данилов',
+                              avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
+                           },
+                           text: `Понедельник, Вторник, Среда: 08:00 - 18:00`,
                         },
-                        text: `Понедельник, Вторник, Среда: 08:00 - 18:00`,
-                     },
-                     {
-                        user: {
-                           fullName: 'Дмитрий Лебедь',
-                           avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
+                        {
+                           user: {
+                              fullName: 'Дмитрий Лебедь',
+                              avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
+                           },
+                           text: `Понедельник, Вторник, Среда, Четверг, Пятница, Суббота: 08:00 - 18:00`,
                         },
-                        text: `Понедельник, Вторник, Среда, Четверг, Пятница,  Суббота: 08:00 - 18:00`,
-                     },
-                  ]}
-                  isLoading={false}
-               />
+                     ]}
+                     isLoading={false}
+                  />
+               </div>
+               <IconButton
+                  aria-label="menu"
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleMenuOpen}
+                  className={styles.menuButton}>
+                  <MenuIcon />
+               </IconButton>
+               <Menu
+                  id="simple-menu"
+                  anchorEl={menuAnchor}
+                  keepMounted
+                  open={Boolean(menuAnchor)}
+                  onClose={handleMenuClose}>
+                  <MenuItem onClick={handleMenuClose}>
+                     <TagsBlock items={tags.items} isLoading={isTagsLoading} />
+                  </MenuItem>
+                  <MenuItem onClick={handleMenuClose}>
+                     <CommentsBlock
+                        items={[
+                           {
+                              user: {
+                                 fullName: 'Максим Данилов',
+                                 avatarUrl: 'https://mui.com/static/images/avatar/1.jpg',
+                              },
+                              text: `Понедельник, Вторник, Среда: 08:00 - 18:00`,
+                           },
+                           {
+                              user: {
+                                 fullName: 'Дмитрий Лебедь',
+                                 avatarUrl: 'https://mui.com/static/images/avatar/2.jpg',
+                              },
+                              text: `Понедельник, Вторник, Среда, Четверг, Пятница, Суббота: 08:00 - 18:00`,
+                           },
+                        ]}
+                        isLoading={false}
+                     />
+                  </MenuItem>
+               </Menu>
             </div>
          </div>
       </div>

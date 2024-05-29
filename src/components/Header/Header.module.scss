@@ -13,6 +13,7 @@
 .inner {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -32,6 +33,9 @@
 }
 
 .buttons {
+  display: flex;
+  flex-wrap: wrap;
+
   button {
     margin-left: 10px;
     color: rgb(0, 0, 0);
@@ -39,5 +43,41 @@
 
   a {
     text-decoration: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    margin-bottom: 10px;
+  }
+
+  .buttons {
+    justify-content: center;
+    width: 100%;
+
+    button {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 14px;
+    padding: 0 5px;
+  }
+
+  .buttons {
+    button {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 5px;
+    }
   }
 }

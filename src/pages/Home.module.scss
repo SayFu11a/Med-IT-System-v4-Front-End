@@ -12,6 +12,22 @@
 
     .contentRight {
       max-width: 365px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menuButton {
+      display: none;
+    }
+
+    @media (max-width: 473px) {
+      .blocks {
+        display: none;
+      }
+
+      .menuButton {
+        display: block;
+      }
     }
   }
 }

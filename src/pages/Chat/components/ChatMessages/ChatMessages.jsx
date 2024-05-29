@@ -39,43 +39,40 @@ export const ChatMessages = ({ selectedReceiverId, receiverName }) => {
     })
   }
 
-  console.log(chatMessages)
-
   return (
     <div className={styles.root}>
       <div className={styles.messagesList}>
+        {chatMessages.map((message) => {
+          const isMine = message.senderId === userData._id
+          const [messageHours, messageMinutes] = new Date(message.timestamp)
+            .toLocaleTimeString()
+            .split(':')
 
-      {chatMessages.map((message) => {
-        const isMine = message.senderId === userData._id
-        const [messageHours, messageMinutes] = new Date(message.timestamp)
-          .toLocaleTimeString()
-          .split(':')
-
-        return userData.patient ? (
-          
-          <div
-            className={styles.patientMessage}
-            style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
-          >
-            <p className={styles.messageTime}>
-              {`${messageHours}:${messageMinutes}`}
-            </p>
-            <p className={styles.messageText}>{message.message}</p>
-          </div>
-        ) : (
-          <div
-            className={styles.doctorMessage}
-            style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
-          >
-            <p className={styles.messageTime}>
-              {`${messageHours}:${messageMinutes}`}
-            </p>
-            <p className={styles.messageText}>{message.message}</p>
-          </div>
-        )
-      })}
+          return userData.patient ? (
+            <div
+              key={message.timestamp}
+              className={styles.patientMessage}
+              style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
+            >
+              <p className={styles.messageTime}>
+                {`${messageHours}:${messageMinutes}`}
+              </p>
+              <p className={styles.messageText}>{message.message}</p>
+            </div>
+          ) : (
+            <div
+              key={message.timestamp}
+              className={styles.doctorMessage}
+              style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
+            >
+              <p className={styles.messageTime}>
+                {`${messageHours}:${messageMinutes}`}
+              </p>
+              <p className={styles.messageText}>{message.message}</p>
+            </div>
+          )
+        })}
       </div>
-
 
       <div className={styles.inputContainer}>
         <input

@@ -67,8 +67,6 @@ export const PostDetailsPage = ({ isPatient, patient }) => {
       }
    };
 
-   console.log(data);
-
    return (
       <div className={styles.root}>
          <div className={styles.postBlock}>

@@ -19,7 +19,6 @@ function App() {
       dispatch(fetchAuthMe());
    }, []);
 
-   // Выберите данные из Redux store с помощью useSelector
    const patientData = useSelector((state) => {
       if (state.auth && state.auth.data) {
          return state.auth.data.patient;
@@ -33,9 +32,6 @@ function App() {
       }
       return null;
    });
-
-   // Теперь у вас есть доступ к полю data.patient из промиса в Redux store
-   console.log(patient);
 
    return (
       <>

@@ -76,6 +76,7 @@ label {
     width: 100%;
     border-right: 1px solid rgb(221, 221, 227);
     overflow-y: auto;
+    max-height: calc(100vh - 56px);
   }
 
   .chatMessages {

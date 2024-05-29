@@ -1,10 +1,18 @@
 .root {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
   position: relative;
-  height: calc(100% - 73px);
   padding: 20px;
+  height: 100%;
+  max-height: calc(100vh - 136px);
+
+  .messagesList {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    overflow-y: auto;
+    max-height: calc(100vh - 136px);
+    height: 100%;
+    padding-bottom: 60px;
+  }
 
   p {
     margin: 0;
@@ -43,46 +51,19 @@
   }
 
   .patientMessage {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    align-self: flex-end;
+    max-width: 520px;
+    min-width: 220px;
+    border-radius: 12px 12px 0px;
+    padding: 15px 12px;
+    background-color: rgb(115, 87, 255);
 
-    .patientImg {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-    }
-
-    .textBlock {
-      background-color: rgb(234, 233, 241);
-      max-width: 520px;
-      min-width: 220px;
-      padding: 12px;
-      border-radius: 12px 12px 12px 0px;
-      p {
-        color: rgb(36, 36, 36);
-      }
-
-      .topInfo {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 8px;
-
-        .patientName {
-          color: rgb(36, 36, 36);
-          font-weight: 700;
-          font-size: 16px;
-          line-height: 20px;
-        }
-
-        .patientMessageTime {
-          color: rgb(106, 106, 113);
-          font-size: 14px;
-          line-height: 18px;
-          font-weight: 400;
-        }
-      }
+    .messageTime {
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+      color: rgb(255, 255, 255);
+      margin-bottom: 12px;
     }
   }
 

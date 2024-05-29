@@ -1,41 +1,91 @@
+import { useSelector } from 'react-redux'
 import styles from './ChatMessages.module.scss'
+import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
+import instance from '../../../../axios'
 
-export const ChatMessages = () => {
+export const ChatMessages = ({ selectedReceiverId, receiverName }) => {
+  const userData = useSelector((state) => state.auth?.data)
+  const selectedActiveChatMessages = useMemo(
+    () => userData?.chats[selectedReceiverId] || [],
+    [selectedReceiverId, userData?.chats]
+  )
+
+  const [inputData, setInputData] = useState('')
+  const [chatMessages, setChatMessages] = useState(selectedActiveChatMessages)
+
+  useEffect(() => {
+    setChatMessages(selectedActiveChatMessages)
+  }, [selectedActiveChatMessages])
+
+  const handleSendMessage = async () => {
+    if (!inputData) return
+
+    setChatMessages((prev) => [
+      ...prev,
+      {
+        senderId: userData._id,
+        receiverId: selectedReceiverId,
+        message: inputData,
+        timestamp: new Date()
+      }
+    ])
+
+    setInputData('')
+    await instance.post('/messages', {
+      receiverId: selectedReceiverId,
+      message: inputData,
+      senderId: userData._id
+    })
+  }
+
+  console.log(chatMessages)
+
   return (
     <div className={styles.root}>
-      <p className={styles.timeLabel}>Сегодня</p>
+      <div className={styles.messagesList}>
 
-      <div className={styles.doctorMessage}>
-        <p className={styles.messageTime}>11:44</p>
-        <p className={styles.messageText}>
-          Здравствуйте, Максим! Записали вас на пятницу, время записи 14:30!
-        </p>
-      </div>
+      {chatMessages.map((message) => {
+        const isMine = message.senderId === userData._id
+        const [messageHours, messageMinutes] = new Date(message.timestamp)
+          .toLocaleTimeString()
+          .split(':')
 
-      <div className={styles.patientMessage}>
-        <img
-          className={styles.patientImg}
-          src="https://www.gravatar.com/avatar/1dbf9af588c269f188dc5be2b0a038ed.jpg?size=240&d=https%3A%2F%2Fwww.artstation.com%2Fassets%2Fdefault_avatar.jpg"
-          alt=""
-        />
-        <div className={styles.textBlock}>
-          <div className={styles.topInfo}>
-            <p className={styles.patientName}>Максим Гаврилов</p>
-            <p className={styles.patientMessageTime}>11:58</p>
+        return userData.patient ? (
+          
+          <div
+            className={styles.patientMessage}
+            style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
+          >
+            <p className={styles.messageTime}>
+              {`${messageHours}:${messageMinutes}`}
+            </p>
+            <p className={styles.messageText}>{message.message}</p>
           </div>
-          <p className={styles.messageText}>
-            Добрый день! Спасибо, приду без опозданий!
-          </p>
-        </div>
+        ) : (
+          <div
+            className={styles.doctorMessage}
+            style={{ alignSelf: isMine ? 'flex-end' : 'flex-start' }}
+          >
+            <p className={styles.messageTime}>
+              {`${messageHours}:${messageMinutes}`}
+            </p>
+            <p className={styles.messageText}>{message.message}</p>
+          </div>
+        )
+      })}
       </div>
+
 
       <div className={styles.inputContainer}>
         <input
+          onChange={(e) => setInputData(e.target.value)}
+          value={inputData}
           className={styles.userInput}
           type="text"
           placeholder="Введите ваше сообщение"
         />
-        <button>Отправить</button>
+        <button onClick={handleSendMessage}>Отправить</button>
       </div>
     </div>
   )

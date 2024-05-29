@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { selectIsAuth } from '../../redux/slices/auth'
 import styles from './Chat.module.scss'
 import { ChatItem } from './components/ChatItem/ChatItem'
 import { ChatMessages } from './components/ChatMessages/ChatMessages'
-import { baseURL } from '../../axios'
+import instance, { baseURL } from '../../axios'
 
 const Chat = ({ patient }) => {
+  const [users, setUsers] = useState([])
+  const [selectedReceiverId, setSelectedReceiverId] = useState(null)
+
   const isAuth = useSelector(selectIsAuth)
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [receiverId, setReceiverId] = useState('')
 
-  // Используем patient._id как senderId
+  const userData = useSelector((state) => state.auth?.data)
+
+  const isPatient = useSelector((state) => state.auth?.data?.patient)
+
+  const doctors = useMemo(() => users.filter((user) => !user.patient), [users])
+  const patients = useMemo(() => users.filter((user) => user.patient), [users])
+  const chatUsersList = isPatient ? doctors : patients
+
+  // console.log(doctors, patients)
+
   const senderId = patient?._id
 
   useEffect(() => {
     if (isAuth) {
-      axios
+      instance
         .get(`${baseURL}/messages`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -34,11 +45,9 @@ const Chat = ({ patient }) => {
     }
   }, [isAuth])
 
-  console.log(patient?.messages)
-
   const handleSendMessage = async () => {
     try {
-      const response = await axios.post(
+      const response = await instance.post(
         `${baseURL}/messages`,
         {
           receiverId,
@@ -58,19 +67,51 @@ const Chat = ({ patient }) => {
     }
   }
 
+  useEffect(() => {
+    const getAllUsers = async () => {
+      const { data } = await instance.get('/user/list')
+      console.log(data)
+      setUsers(data)
+    }
+    getAllUsers()
+  }, [])
+
+  useEffect(() => {
+    if (!selectedReceiverId && !!chatUsersList.length) {
+      setSelectedReceiverId(chatUsersList[0]._id)
+    }
+  }, [chatUsersList, selectedReceiverId])
+
+  useEffect(() => {
+    // send()
+  }, [])
+
+  const send = async () => {
+    instance.post('/messages', {
+      receiverId: '66073e6a4bdad1c07f03b069',
+      message: 'Hellloooooo',
+      senderId: userData._id
+    })
+  }
+
+  const receiverUser = chatUsersList.find(
+    (user) => user._id === selectedReceiverId
+  )
+  // const selectedActiveChatMessages = userData
+
+  // console.log(userData)
+
   return (
     <div className={styles.container}>
       <div className={styles.chatsList}>
-        <ChatItem
-          name="Максим Гаврилов"
-          lastMessage="Добрый день! Спасибо, приду без опозданий!          "
-        />
-        <ChatItem
-          name="Юрий Прикладов"
-          lastMessage="Здравствуйте, а когда приходить на консультацию?"
-        />
-        <ChatItem name="Анастасия Сколкова" lastMessage="Поняла вас, спасибо большое!" />
-        <ChatItem name="Андрей Белкин" lastMessage="Хорошо, приду через 2 недели" />
+        {chatUsersList.map((user) => (
+          <ChatItem
+            key={user._id}
+            isSelected={user._id === selectedReceiverId}
+            name={user.fullName}
+            setSelectedChatId={() => setSelectedReceiverId(user._id)}
+          />
+        ))}
       </div>
       <div className={styles.chatMessages}>
         <div className={styles.topActiveChatInfo}>
@@ -79,39 +120,35 @@ const Chat = ({ patient }) => {
             className={styles.activeChatImg}
             alt=""
           />
-          <p className={styles.userName}>Максим Гаврилов</p>
+          <p className={styles.userName}>{receiverUser?.fullName}</p>
         </div>
-        <ChatMessages />
-      </div>
-
-      {/* <div className={styles.messageList}>
-        {patient?.messages?.length > 0 ? (
-          patient.messages.map((msg, index) => (
-            <div key={index} className={styles.message}>
-              <strong>{msg.senderId}</strong>: {msg.message}
-            </div>
-          ))
-        ) : (
-          <div className={styles.noMessages}>Нет сообщений</div>
-        )}
-      </div>
-      <div className={styles.sendMessageForm}>
-        <input
-          type="text"
-          placeholder="ID получателя"
-          value={receiverId}
-          onChange={(e) => setReceiverId(e.target.value)}
+        <ChatMessages
+          selectedReceiverId={selectedReceiverId}
+          receiverName={receiverUser?.fullName}
         />
-        <input
-          type="text"
-          placeholder="Введите сообщение"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
-        />
-        <button onClick={handleSendMessage}>Отправить</button>
-      </div> */}
+      </div>
     </div>
   )
 }
 
 export default Chat
+
+/* 
+
+- Doctor:
+
+chats: {
+  Patient1Id: [],
+  PAtient2Id: []
+}
+
+
+- Patient: 
+
+chats: {
+  doctor1Id: []
+  doctor2Id: []
+}
+
+
+*/

@@ -10,6 +10,7 @@ import Calendar from './pages/Calendar';
 import Chat from './pages/Chat';
 import { PostDetailsPage } from './pages/PostDetailsPage/PostDetailsPage';
 import { About } from './pages/About';
+import { PatientHealth } from './pages/PatientHealth';
 
 function App() {
    const dispatch = useDispatch();
@@ -59,9 +60,13 @@ function App() {
                <Route path="/add-post" element={<AddPost />} />
                <Route path="/login" element={<Login />} />
                <Route path="/register" element={<Registration />} />
-               <Route path="/calendar" element={<Calendar />} />
+               <Route
+                  path="/calendar"
+                  element={<Calendar isPatient={patientData} patient={patient} />}
+               />
                <Route path="/About" element={<About />} />
                <Route path="/chat" element={<Chat patient={patient} />} />
+               <Route path="/patienthealth" element={<PatientHealth />} />
             </Routes>
          </Container>
       </>

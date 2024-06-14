@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ru from 'date-fns/locale/ru';
 import axios, { baseURL } from '../../axios';
 import styles from './Calendar.module.scss';
-import classNames from 'classnames';
 
 // Регистрация локали
 registerLocale('ru', ru);
@@ -29,7 +28,7 @@ const symptoms = [
    'Резкое ухудшение зрения',
 ];
 
-function Calendar() {
+function Calendar({ isPatient, patient }) {
    const [selectedDate, setSelectedDate] = useState(new Date());
    const [symptomChecks, setSymptomChecks] = useState(
       symptoms.reduce((acc, symptom) => {
@@ -37,6 +36,51 @@ function Calendar() {
          return acc;
       }, {}),
    );
+
+   useEffect(() => {
+      const symptomsForDate = getSymptomsByDate(patient?.healthRecords, selectedDate);
+      if (symptomsForDate) {
+         setSymptomChecks(symptomsForDate);
+      } else {
+         setSymptomChecks(
+            symptoms.reduce((acc, symptom) => {
+               acc[symptom] = false;
+               return acc;
+            }, {}),
+         );
+      }
+   }, [selectedDate, patient]);
+
+   const getSymptomsByDate = (healthRecords, date) => {
+      // Проверка на существование и тип healthRecords
+      if (!Array.isArray(healthRecords)) {
+         console.error('healthRecords is not an array or does not exist');
+         return null;
+      }
+
+      console.log(patient);
+
+      // Форматируем дату для сравнения (без времени)
+      const targetDate = new Date(date).toISOString().split('T')[0];
+
+      // Фильтруем записи за выбранную дату
+      const recordsForDate = healthRecords.filter((record) => {
+         const recordDate = new Date(record.date).toISOString().split('T')[0];
+         return recordDate === targetDate;
+      });
+
+      // Если нет записей за эту дату, возвращаем null
+      if (recordsForDate.length === 0) {
+         return null;
+      }
+
+      // Находим запись с самым поздним временем
+      const latestRecord = recordsForDate.reduce((latest, current) => {
+         return new Date(latest.date) > new Date(current.date) ? latest : current;
+      });
+
+      return latestRecord.symptoms;
+   };
 
    const handleSymptomChange = (symptom) => {
       setSymptomChecks((prev) => ({

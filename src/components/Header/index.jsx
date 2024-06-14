@@ -52,18 +52,35 @@ export const Header = ({ isPatient, patient }) => {
                               Сообщения
                            </Button>
                         </Link>
-                        <Link to="/calendar">
-                           <Button variant="contained">
-                              {' '}
-                              <img
-                                 src="https://cdn3.iconfinder.com/data/icons/teamwork-and-organization/25/list_clipboard_planning-1024.png"
-                                 alt=""
-                                 width="20"
-                                 style={{ marginRight: '10px', verticalAlign: 'middle' }}
-                              />
-                              Самочувствие
-                           </Button>
-                        </Link>
+                        {isPatient && (
+                           <Link to="/calendar">
+                              <Button variant="contained">
+                                 {' '}
+                                 <img
+                                    src="https://cdn3.iconfinder.com/data/icons/teamwork-and-organization/25/list_clipboard_planning-1024.png"
+                                    alt=""
+                                    width="20"
+                                    style={{ marginRight: '10px', verticalAlign: 'middle' }}
+                                 />
+                                 Самочувствие
+                              </Button>
+                           </Link>
+                        )}
+                        {!isPatient && (
+                           <Link to="/patienthealth">
+                              <Button variant="contained">
+                                 {' '}
+                                 <img
+                                    src="https://cdn3.iconfinder.com/data/icons/teamwork-and-organization/25/list_clipboard_planning-1024.png"
+                                    alt=""
+                                    width="20"
+                                    style={{ marginRight: '10px', verticalAlign: 'middle' }}
+                                 />
+                                 Динамика состояния
+                              </Button>
+                           </Link>
+                        )}
+
                         {!isPatient && (
                            <Link to="/add-post">
                               <Button variant="contained">Добавить Пациента</Button>
